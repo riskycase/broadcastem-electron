@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Required meta tags-->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- UIkit CSS-->
+		<link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.css">
+		<link rel="stylesheet" href="./uikit-extentions.css">
+		<!-- UIkit JS-->
+		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
+		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
+		
+		<!-- Theme JS-->
+		<script src="./theme.js"></script>
+		
+		<title>Broadcast 'em - Preferences</title>
+		
+		<style>
+			[id^="banner-theme"] {
+				cursor: pointer;
+			}
+
+			.background-active {
+				outline: solid;
+				outline-width: 5px;
+				outline-offset: -5px;
+				outline-color: #aaa;
+			}
+			a {
+				border-bottom: 1px;
+				border-bottom-style: dotted;
+			}
+			a:hover {
+				text-decoration	: none;
+			}
+		</style>
+		
+	</head>
+	
+	<body class="uk-background-secondary uk-light">
+  
+		<header>
+			<div class="uk-navbar-container uk-light">
+				<nav id="banner" class="uk-navbar uk-padding-small background-light-blue" uk-navbar>
+					<div class="uk-navbar-center">
+						<div class="uk-navbar-logo uk-text-large" style="color: #fff">Broadcast 'em - Preferences</div>
+					</div>
+		
+					<div class="uk-navbar-right uk-button-group" id="buttons">
+
+						<button id="cancel" class="uk-button uk-button-default uk-margin-right-small" uk-tooltip="title: Ignore the changes made now and use the previous settings; pos: bottom">Cancel</button>
+						
+						<button id="save" class="uk-button uk-button-default uk-margin-right-small" uk-tooltip="title: Apply these settings to the app; pos: bottom">Save</button>
+						
+					</div>
+				</nav>
+			</div>
+		</header>
+		
+		<div id="main" class="uk-card uk-padding-small uk-height-expand" uk-grid>
+			
+			<div id="dark-mode-group" class="uk-width-1-1">
+				
+				<div class="uk-flex-inline">Dark mode: </div>
+				
+				<div class="uk-flex-inline">				
+					<button class="uk-button uk-button-default" id="dark-mode-enable" uk-toggle="target: #dark-mode-enable,#dark-mode-disable; animation: uk-animation-fade; queued: true">Enable</button>
+					<button class="uk-button uk-button-default" id="dark-mode-disable" uk-toggle="target: #dark-mode-enable,#dark-mode-disable; animation: uk-animation-fade; queued: true">Disable</button>				
+				</div>
+				
+			</div>
+			
+			<div id="banner-group" class="uk-width-1-1 uk-child-width-expand uk-grid-small" uk-grid>
+				
+				<div class="uk-width-auto uk-margin-small-right">Banner: </div>
+				
+				<div class="uk-grid-collapse uk-child-width-1-4 uk-text-center" uk-grid>
+					<div id="banner-theme-indigo" class="uk-card uk-card-secondary uk-padding-small background-indigo" onclick="setTheme('indigo')">Indigo</div>
+					<div id="banner-theme-light-indigo" class="uk-card uk-card-secondary uk-padding-small background-light-indigo" onclick="setTheme('light-indigo')">Light Indigo</div>
+					<div id="banner-theme-blue" class="uk-card uk-card-secondary uk-padding-small background-blue" onclick="setTheme('blue')">Blue</div>
+					<div id="banner-theme-light-blue" class="uk-card uk-card-secondary uk-padding-small background-light-blue" onclick="setTheme('light-blue')">Light Blue</div>
+					<div id="banner-theme-green" class="uk-card uk-card-secondary uk-padding-small background-green" onclick="setTheme('green')">Green</div>
+					<div id="banner-theme-light-green" class="uk-card uk-card-secondary uk-padding-small background-light-green" onclick="setTheme('light-green')">Light Green</div>
+					<div id="banner-theme-red" class="uk-card uk-card-secondary uk-padding-small background-red" onclick="setTheme('red')">Red</div>
+					<div id="banner-theme-light-red" class="uk-card uk-card-secondary uk-padding-small background-light-red" onclick="setTheme('light-red')">Light Red</div>
+				</div>
+
+			</div>
+		
+		</div>
+		
+		<footer class="uk-flex uk-flex-center uk-width-1-1" style="position: absolute; bottom: 10px;">
+			<span class="uk-flex-center">An <a id="github">open-source</a> app brought to you by <a id="author">riskycase</a></span>
+		</footer>
+		
+		<script src="./preferences.js"></script>
+	
+	</body>
+</html>

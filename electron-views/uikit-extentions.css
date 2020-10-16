@@ -1,0 +1,88 @@
+/*
+-------------------------------------------------------------------------------
+
+These are some extended CSS classes to UIkit framework and a few common rules 
+which will be used in all the pages used by this web app. The original CSS 
+framework is taken from https://getuikit.com/
+
+-------------------------------------------------------------------------------
+*/
+
+
+@font-face {
+	font-family: 'Source Sans Pro';
+	src: local('SourceSansPro'), url('./SourceSansPro-Regular.ttf') format('truetype');
+}
+
+body {
+	font-family: 'Source Sans Pro';
+	height: 100vh;
+}
+
+.uk-button-success {
+	background-color: #28a745;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.uk-button-success:hover, uk-button-success:focus {
+	background-color: #23953d;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.uk-button-success:active {
+	background-color: #1d7f34;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.uk-button-info {
+	background-color: #3399ff;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.uk-button-info:hover, uk-button-info:focus {
+	background-color: #1b8dff;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.uk-button-info:active {
+	background-color: #007ffe;
+	color: #fff;
+	border: 1px solid transparent;
+}
+
+.background-indigo {
+	background-color: #292961;
+}
+
+.background-light-indigo {
+	background-color: #4b4ba3;
+}
+
+.background-blue {
+	background-color: #1a3652;
+}
+
+.background-light-blue {
+	background-color: #2261a1;
+}
+
+.background-green {
+	background-color: #0d4524;
+}
+
+.background-light-green {
+	background-color: #156b39;
+}
+
+.background-red {
+	background-color: #691a16;
+}
+
+.background-light-red {
+	background-color: #a62e21;
+}

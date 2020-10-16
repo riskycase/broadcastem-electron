@@ -1,0 +1,25 @@
+{
+	"name": "broadcastem-electron",
+	"version": "0.0.1",
+	"description": "Electron.js wrapper for broadcastem-core",
+	"main": "index.js",
+	"author": "Hrishikesh Patil",
+	"license": "GPL-3.0-or-later",
+	"scripts": {
+		"start": "node ./bin/www",
+		"elec": "electron index.js",
+		"build": "electron-builder --publish never",
+		"release": "electron-builder --publish always",
+		"test": "nyc --reporter=text mocha tests/*.js"
+	},
+	"private": false,
+	"dependencies": {
+		"broadcastem-core": "^2.2.4",
+		"electron-store": "^6.0.1",
+		"uikit": "^3.5.8"
+	},
+	"devDependencies": {
+		"electron": "^10.1.3",
+		"electron-builder": "^22.8.1"
+	}
+}
