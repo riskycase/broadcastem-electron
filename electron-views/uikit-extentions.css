@@ -8,10 +8,10 @@ framework is taken from https://getuikit.com/
 -------------------------------------------------------------------------------
 */
 
-
 @font-face {
 	font-family: 'Source Sans Pro';
-	src: local('SourceSansPro'), url('./SourceSansPro-Regular.ttf') format('truetype');
+	src: local('SourceSansPro'),
+		url('./SourceSansPro-Regular.ttf') format('truetype');
 }
 
 body {
@@ -25,7 +25,8 @@ body {
 	border: 1px solid transparent;
 }
 
-.uk-button-success:hover, uk-button-success:focus {
+.uk-button-success:hover,
+uk-button-success:focus {
 	background-color: #23953d;
 	color: #fff;
 	border: 1px solid transparent;
@@ -43,7 +44,8 @@ body {
 	border: 1px solid transparent;
 }
 
-.uk-button-info:hover, uk-button-info:focus {
+.uk-button-info:hover,
+uk-button-info:focus {
 	background-color: #1b8dff;
 	color: #fff;
 	border: 1px solid transparent;

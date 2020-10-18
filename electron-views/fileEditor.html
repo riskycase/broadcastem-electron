@@ -2,18 +2,24 @@
 <html>
 	<head>
 		<!-- Required meta tags-->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
 		<!-- UIkit CSS-->
-		<link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.css">
-		<link rel="stylesheet" href="./uikit-extentions.css">
+		<link
+			rel="stylesheet"
+			href="../node_modules/uikit/dist/css/uikit.css"
+		/>
+		<link rel="stylesheet" href="./uikit-extentions.css" />
 		<!-- UIkit JS-->
 		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
 		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
-		
+
 		<!-- Theme JS-->
 		<script src="./theme.js"></script>
-		
+
 		<title>Broadcast 'em - File Editor</title>
 		<style>
 			body {
@@ -21,37 +27,52 @@
 			}
 		</style>
 	</head>
-	
+
 	<body class="uk-background-secondary uk-light">
-  
 		<header>
 			<div class="uk-navbar-container uk-light">
-				<nav id="banner" class="uk-navbar uk-padding-small background-light-blue" uk-navbar>
-				
+				<nav
+					id="banner"
+					class="uk-navbar uk-padding-small background-light-blue"
+					uk-navbar
+				>
 					<div class="uk-navbar-left">
-						
-						<div class="uk-text-large" style="color: #fff">Currently sharing:<br>
-						<div class="uk-text-small">Click on an item to open it or remove it from the list using the link beside</div></div>
-						
+						<div class="uk-text-large" style="color: #fff">
+							Currently sharing:<br />
+							<div class="uk-text-small">
+								Click on an item to open it or remove it from
+								the list using the link beside
+							</div>
+						</div>
 					</div>
-					
+
 					<div class="uk-navbar-right">
-						
-						<button id="clear-all" class="uk-button uk-button-default uk-margin-right-small" uk-tooltip="title: Clear all the selected files from the list; pos: bottom">Clear All</button>
-						
-						<button id="done" class="uk-button uk-button-default uk-margin-right-small" uk-tooltip="title: Return to main menu; pos: bottom">Done</button>
-						
+						<button
+							id="clear-all"
+							class="uk-button uk-button-default uk-margin-right-small"
+							uk-tooltip="title: Clear all the selected files from the list; pos: bottom"
+						>
+							Clear All
+						</button>
+
+						<button
+							id="done"
+							class="uk-button uk-button-default uk-margin-right-small"
+							uk-tooltip="title: Return to main menu; pos: bottom"
+						>
+							Done
+						</button>
 					</div>
 				</nav>
 			</div>
 		</header>
-		
-		<div id="list" class="uk-height-expand" style="height: calc(100vh - 87px); overflow: auto">
-			
-		</div>
-		
+
+		<div
+			id="list"
+			class="uk-height-expand"
+			style="height: calc(100vh - 87px); overflow: auto"
+		></div>
+
 		<script src="./fileEditor.js"></script>
-	
 	</body>
-	
 </html>

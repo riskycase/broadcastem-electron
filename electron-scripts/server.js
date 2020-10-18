@@ -46,7 +46,7 @@ module.exports.options = options = {
 	},
 	set version(version) {
 		this._version = version;
-	}
+	},
 };
 
 module.exports.optionsChanged = optionsChanged;
@@ -62,7 +62,7 @@ module.exports.refreshServer = function () {
 			destination: options.dest,
 			list: options.list,
 		},
-		restart: false
+		restart: false,
 	});
 	preferences.getContents().send('refresh', 'done');
 };
@@ -74,7 +74,7 @@ module.exports.launchServer = function () {
 		flags: {
 			destination: options.dest,
 			list: options.list,
-		}
+		},
 	}).then(createServer);
 };
 
@@ -85,7 +85,8 @@ module.exports.isServerListening = function () {
 module.exports.serverListening = serverListening;
 
 function optionsChanged() {
-	if(server && server.listening) preferences.getContents().send('refresh', 'needed');
+	if (server && server.listening)
+		preferences.getContents().send('refresh', 'needed');
 }
 
 function getAddresses() {
@@ -93,7 +94,7 @@ function getAddresses() {
 	let addresses = [];
 	for (const iface in ni) {
 		const ip4 = ni[iface].find(iface => iface.family === 'IPv4');
-		if(!ip4.internal) addresses.push([iface, ip4.address]);
+		if (!ip4.internal) addresses.push([iface, ip4.address]);
 	}
 	return addresses;
 }
@@ -113,16 +114,18 @@ function serverListening() {
 }
 
 function serverErrored(err) {
-	if(err.code === 'EADDRINUSE') preferences.getContents().send('status', 'port-used');
-	if(err.code === 'EACCES') preferences.getContents().send('status', 'port-err');
+	if (err.code === 'EADDRINUSE')
+		preferences.getContents().send('status', 'port-used');
+	if (err.code === 'EACCES')
+		preferences.getContents().send('status', 'port-err');
 }
 
 function killServer() {
-	if(server && server.listening) server.close();	
+	if (server && server.listening) server.close();
 }
 
 function destroyServer() {
-	preferences.getContents().send('status', 'closing');	
+	preferences.getContents().send('status', 'closing');
 	killServer();
 	preferences.getContents().send('status', 'closed');
 }

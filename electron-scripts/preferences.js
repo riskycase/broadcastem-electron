@@ -14,34 +14,38 @@ const store = new Store({
 		color: {
 			type: 'string',
 			pattern: '(light-)?(indigo|blue|green|red)',
-			default: 'light-blue'
+			default: 'light-blue',
 		},
 		darkMode: {
 			type: 'boolean',
-			default: true
+			default: true,
 		},
 		destination: {
 			type: 'string',
-			default: app.getPath('downloads')
+			default: app.getPath('downloads'),
 		},
 		list: {
 			type: 'string',
-			default: ''
+			default: '',
 		},
 		port: {
 			type: 'integer',
-			default: 3000
-		}
+			default: 3000,
+		},
 	},
-	encryptionKey: key
+	encryptionKey: key,
 });
 
 module.exports.store = store;
 
-module.exports.setContents = (receivedContents) => {
+module.exports.setContents = receivedContents => {
 	contents = receivedContents;
-	contents.on('did-finish-load', () =>{
-		contents.executeJavaScript(`applyTheme({color: '${store.get('color')}',darkMode: ${store.get('darkMode')}})`);
+	contents.on('did-finish-load', () => {
+		contents.executeJavaScript(
+			`applyTheme({color: '${store.get('color')}',darkMode: ${store.get(
+				'darkMode'
+			)}})`
+		);
 	});
 };
 
@@ -49,17 +53,23 @@ module.exports.getContents = () => contents;
 
 module.exports.loadPreferences = function (receivedContents = contents) {
 	contents = receivedContents;
-	BrowserWindow.fromWebContents(contents).loadFile(path.resolve(__dirname, '../electron-views/preferences.html'))
-	.then(() => {
-		contents.send('load', {	color: store.get('color'),darkMode: store.get('darkMode')});
-	});
+	BrowserWindow.fromWebContents(contents)
+		.loadFile(path.resolve(__dirname, '../electron-views/preferences.html'))
+		.then(() => {
+			contents.send('load', {
+				color: store.get('color'),
+				darkMode: store.get('darkMode'),
+			});
+		});
 };
 
 ipcMain.on('input', (event, element, object) => {
 	if (element === 'cancel') control.loadControl();
 	else if (element === 'save') saveOptions(object);
-	else if (element === 'github') shell.openExternal('https://github.com/riskycase/file-server');
-	else if (element === 'author') shell.openExternal('https://github.com/riskycase');
+	else if (element === 'github')
+		shell.openExternal('https://github.com/riskycase/file-server');
+	else if (element === 'author')
+		shell.openExternal('https://github.com/riskycase');
 });
 
 function saveOptions(options) {
