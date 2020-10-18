@@ -8,7 +8,7 @@ let refreshNeeded = false;
 
 //Check for the latest version
 require('https').get(
-	'https://raw.githubusercontent.com/riskycase/broadcastem-electron/package.json',
+	'https://raw.githubusercontent.com/riskycase/broadcastem-electron/trunk/package.json',
 	res => {
 		res.setEncoding('utf8');
 		let body = '';

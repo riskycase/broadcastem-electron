@@ -67,7 +67,7 @@ ipcMain.on('input', (event, element, object) => {
 	if (element === 'cancel') control.loadControl();
 	else if (element === 'save') saveOptions(object);
 	else if (element === 'github')
-		shell.openExternal('https://github.com/riskycase/file-server');
+		shell.openExternal('https://github.com/riskycase/broadcastem-electron');
 	else if (element === 'author')
 		shell.openExternal('https://github.com/riskycase');
 });
