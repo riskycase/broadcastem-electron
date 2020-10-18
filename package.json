@@ -9,8 +9,7 @@
 		"start": "node ./bin/www",
 		"elec": "electron index.js",
 		"build": "electron-builder --publish never",
-		"release": "electron-builder --publish always",
-		"test": "nyc --reporter=text mocha tests/*.js"
+		"release": "electron-builder --publish always"
 	},
 	"private": false,
 	"dependencies": {

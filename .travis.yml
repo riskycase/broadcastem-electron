@@ -1,12 +1,5 @@
 jobs:
   include:
-    - stage: Test
-      language: node_js
-      node_js: node
-      script:
-        - yarn install
-        - yarn test
-
     - stage: Build
       cache:
         directories:
@@ -16,7 +9,6 @@ jobs:
 
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
-      if: NOT branch = deploy
       os: osx
       osx_image: xcode10.2
       language: node_js
@@ -36,7 +28,6 @@ jobs:
 
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
-      if: NOT branch = deploy
       os: linux
       services: docker
       language: generic
@@ -48,10 +39,8 @@ jobs:
          -v ~/.cache/electron:/root/.cache/electron \
          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
          electronuserland/builder:wine \
-          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn build --linux --win"
-
-
-    - stage: Release
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn build --linux"
+    - stage: Build
       cache:
         directories:
           - node_modules
@@ -60,7 +49,29 @@ jobs:
 
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
-      if: branch = deploy
+      os: linux
+      services: docker
+      language: generic
+      script:
+      - |
+        docker run --rm \
+          -e GH_TOKEN=${GH_TOKEN} \
+         -v ${PWD}:/project \
+         -v ~/.cache/electron:/root/.cache/electron \
+         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+         electronuserland/builder:wine \
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn build --win"
+
+    - stage: Release
+      if: tag IS present
+      cache:
+        directories:
+          - node_modules
+          - $HOME/.cache/electron
+          - $HOME/.cache/electron-builder
+
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
       os: osx
       osx_image: xcode10.2
       language: node_js
@@ -72,6 +83,7 @@ jobs:
       - yarn install
       - yarn release
     - stage: Release
+      if: tag IS present
       cache:
         directories:
           - node_modules
@@ -80,7 +92,6 @@ jobs:
 
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
-      if: branch = deploy
       os: linux
       services: docker
       language: generic
@@ -92,11 +103,30 @@ jobs:
          -v ~/.cache/electron:/root/.cache/electron \
          -v ~/.cache/electron-builder:/root/.cache/electron-builder \
          electronuserland/builder:wine \
-          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux"
+    - stage: Release
+      if: tag IS present
+      cache:
+        directories:
+          - node_modules
+          - $HOME/.cache/electron
+          - $HOME/.cache/electron-builder
 
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
+      os: linux
+      services: docker
+      language: generic
+      script:
+      - |
+        docker run --rm \
+          -e GH_TOKEN=${GH_TOKEN} \
+         -v ${PWD}:/project \
+         -v ~/.cache/electron:/root/.cache/electron \
+         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+         electronuserland/builder:wine \
+          /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --win"
+
 env:
   global:
-    secure: Dw3I8YCTqtBUSvVBASMioGxsvf9cxW1KR9OwSdmQKhsjXUTfmq9O3nsaVRYjE95WQerltIE8YI+1Otz/11xrzQqvN7skNJtGAY3MHMhHA7+3HaPwV4fTVvTwBw8TW2uleztJiW7+iMUme0k2UZikwo526f+lLLLRFPaj0R5EJWuuD93g/h8WVda4EgyfJFdxVIppqfEbzutieFpZ3XXqRGqZHYV0AH3SaffqUZ47vH29KfyLvY01lopl+IJugFsPFxfuZDAlkRDAYLP9tjrjcWjYv28NH8qs7+9VHFunC9tyJ/LQ73/wDqmtcWtIUxJzTURVLgeafqr69yyCWFN4vL4T1cqnq8bgwVuUJfmEWs8V6J28LojR6rMkcgi47e/LVuPiZM6oBMY4tG5GNsY+kRTf/urd4ZOCfpWWy3focyB5SzInT8vbaYy2PCdPw+6RUMnr7VYraa2krlRXmacP/aXX8xJ1B2KBB9yA+HZuCuxJn/vvXK3qn9EhSShvnnd1t45dvAzNrH/y1PaKNzqkoc2ZGR5dMUEz7Bwa6jYHUh/x5BLEqFtyeUDhY3fsqdXcym3/180HjmM34wUAYcrqJ+cSbH/TniVIVupOpFqyNgqZ5mhUfa3fIO1/11KuY4jUT7D1XrRwh1pwTmbSyy+5Me0doc72zpXC9ny07jyAHBw=
+    secure: "GJhBwjOG+vSxe0yQW2GyCXsapISsEhNQxVzKM8P5mVTtMBpy+/eaRgwhbdiNfZ5umqrj4rlKyr0EvhcC4nCdpEZ3pGad7F8LZGeRf8Z/sEFuAOrCl/q5ek0z2PDXwYqgxi1WcOGRFlGAGPu9Rb0jHeD/YS+/E7xpdeZoc4OEYen6IlMIDKubvuI6E8hCbA5QIg/4vozF/kK6tUJ2BWMQsxwiaPVLMQKrUr065x2o20EqDnanP/Bm/aeUVipwWIlGEKkSuO0DeGUbNPXI5nOzZqjl8GUd/rvZ46nyWjdZT2OR1j1qCAI1qgiLM4i3DqTgR320ITR/30YHze1z4IuJgmBp5sjlJ0/LazDuId8XcTDqxTQIEWH22hpoN9FOdB4ATAIZ8lNNgBUNn1Y/9RJ0ex7QEi0nJ4Tw4LeiAvYelSz2q+Utnx9h9VN1qpCGpRekdp1LK0I2gAkjPb3ISsC1+0y2fkhUyNergqNIKB1gN5Hy+oudtp2Iuvp8SrGQ31GMrtQO0hYz9leIbRUQGi86FwRk+9OQp6LZyLZZNSpHNLQaQjLFkMt+BmkzuC3CTMtDPKzlCiq324HoEvC3JEO47MtxQGqf5sJkPX4jbwwpJP0YqqyZHWb4ufsOy697Y4CAGk5jlnUb4QvIDSfF5oghy53tJSdz/6ilcwgHFG+3/Rw="
