@@ -13,7 +13,7 @@ ipcMain.on('input', (event, element, ...args) => {
 ipcMain.on('remove', (event, index) => {
 	server.options.files.splice(index, 1);
 	control.refreshNeeded();
-	if(server.options.files.length) createCards();
+	if (server.options.files.length) createCards();
 	else control.loadControl();
 });
 
@@ -28,16 +28,22 @@ function clearList() {
 }
 
 module.exports.loadFileEditor = function () {
-	if(server.options.files.length) {
-		BrowserWindow.fromWebContents(preferences.getContents()).loadFile(path.resolve(__dirname, '../electron-views/fileEditor.html'))
-		.then(() => {
-			createCards();
-		});
+	if (server.options.files.length) {
+		BrowserWindow.fromWebContents(preferences.getContents())
+			.loadFile(
+				path.resolve(__dirname, '../electron-views/fileEditor.html')
+			)
+			.then(() => {
+				createCards();
+			});
 	}
 };
 
-function createCards(value,index) {
-	preferences.getContents().send('list', server.options.files.map((value, index) => `
+function createCards(value, index) {
+	preferences.getContents().send(
+		'list',
+		server.options.files.map(
+			(value, index) => `
 		<div class="uk-card uk-padding-small" style="height: 90px">
 			<div class="uk-float uk-float-left" onclick="listClicked(${index})">
 				<span class="uk-text-large">${path.basename(value)}</span>
@@ -48,5 +54,7 @@ function createCards(value,index) {
 				<a>Remove</a>
 			</div>
 		</div>
-	`));
+	`
+		)
+	);
 }
