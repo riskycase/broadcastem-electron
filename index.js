@@ -4,7 +4,7 @@ const control = require('./electron-scripts/control.js');
 const preferences = require('./electron-scripts/preferences.js');
 const server = require('./electron-scripts/server.js');
 
-function createWindow () {
+function createWindow() {
 	// Create the browser window.
 	const win = new BrowserWindow({
 		width: 800,
@@ -12,14 +12,14 @@ function createWindow () {
 		resizable: false,
 		fullscreenable: false,
 		webPreferences: {
-			nodeIntegration: true
-		}
+			nodeIntegration: true,
+		},
 	});
-	
+
 	win.setMenuBarVisibility(false);
-	
+
 	preferences.setContents(win.webContents);
-	
+
 	control.loadControl();
 }
 

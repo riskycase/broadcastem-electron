@@ -45,30 +45,27 @@ document.getElementById('version').addEventListener('click', () => {
 });
 
 ipcRenderer.on('status', (event, message) => {
-	if(message === 'initiating') {
-		document.getElementById('message').innerHTML = 'Creating server configuration';
-	}
-	else if(message === 'initiated') {
+	if (message === 'initiating') {
+		document.getElementById('message').innerHTML =
+			'Creating server configuration';
+	} else if (message === 'initiated') {
 		document.getElementById('message').innerHTML = 'Parsing as HTTP server';
-	}
-	else if(message === 'created') {
-		document.getElementById('message').innerHTML = 'Binding server to specified port';
-	}
-	else if(message === 'port-err') {
-		document.getElementById('message').innerHTML = 'Can\'t use the selected port, try changing port or run with elevated permissions';
-	}
-	else if(message === 'port-used') {
-		document.getElementById('message').innerHTML = 'The selected port is already being used by another process';
-	}
-	else if(message === 'binded') {
+	} else if (message === 'created') {
+		document.getElementById('message').innerHTML =
+			'Binding server to specified port';
+	} else if (message === 'port-err') {
+		document.getElementById('message').innerHTML =
+			"Can't use the selected port, try changing port or run with elevated permissions";
+	} else if (message === 'port-used') {
+		document.getElementById('message').innerHTML =
+			'The selected port is already being used by another process';
+	} else if (message === 'binded') {
 		document.getElementById('message').innerHTML = 'Server ready';
 		document.getElementById('start-server').style.display = 'none';
 		document.getElementById('kill-server').style.display = 'inline-block';
-	}
-	else if(message === 'closing') {
+	} else if (message === 'closing') {
 		document.getElementById('message').innerHTML = 'Shutting down server';
-	}
-	else if(message === 'closed') {
+	} else if (message === 'closed') {
 		document.getElementById('message').innerHTML = 'Server closed';
 		document.getElementById('ip-address').innerHTML = '';
 		document.getElementById('start-server').style.display = 'inline-block';
@@ -79,7 +76,12 @@ ipcRenderer.on('status', (event, message) => {
 });
 
 ipcRenderer.on('address', (event, message) => {
-	document.getElementById('ip-address').innerHTML = message.map(value => value.join(': ') + ':' + document.getElementById('port').value).join('<br>');
+	document.getElementById('ip-address').innerHTML = message
+		.map(
+			value =>
+				value.join(': ') + ':' + document.getElementById('port').value
+		)
+		.join('<br>');
 });
 
 ipcRenderer.on('version', (event, message) => {
@@ -101,11 +103,12 @@ ipcRenderer.on('load', (event, message) => {
 });
 
 function refresh(refreshNeeded) {
-	if(refreshNeeded === 'needed') {
-		document.getElementById('refresh-server').style.display = 'inline-block';
-		document.getElementById('server-refresh').style.display = 'inline-block';
-	}
-	else if(refreshNeeded === 'done') {
+	if (refreshNeeded === 'needed') {
+		document.getElementById('refresh-server').style.display =
+			'inline-block';
+		document.getElementById('server-refresh').style.display =
+			'inline-block';
+	} else if (refreshNeeded === 'done') {
 		document.getElementById('refresh-server').style.display = 'none';
 		document.getElementById('server-refresh').style.display = 'none';
 	}
@@ -113,15 +116,33 @@ function refresh(refreshNeeded) {
 
 function parseOptions(options) {
 	document.getElementById('selected-dest').innerHTML = options.dest;
-	if(options.list !== '') document.getElementById('selected-list').innerHTML = options.list;
-	else document.getElementById('selected-list').innerHTML = 'No list file selected!';
+	if (options.list !== '')
+		document.getElementById('selected-list').innerHTML = options.list;
+	else
+		document.getElementById('selected-list').innerHTML =
+			'No list file selected!';
 	document.getElementById('version').innerHTML = options.port;
-	if(options.files.length) {
-		if(options.files.length === 1) document.getElementById('selected-files').innerHTML = '1 file selected. <u>Click to view/edit.</u>';
-		else document.getElementById('selected-files').innerHTML = options.files.length +' files selected. <u>Click to view/edit.</u>';
-	}
-	else document.getElementById('selected-files').innerHTML = 'No files selected';
-	if(options.version === 'latest') document.getElementById('version').setAttribute("uk-tooltip","Latest version");
-	else if(options.version === 'old') document.getElementById('version').setAttribute("uk-tooltip","Newer version available, click to view");
+	if (options.files.length) {
+		if (options.files.length === 1)
+			document.getElementById('selected-files').innerHTML =
+				'1 file selected. <u>Click to view/edit.</u>';
+		else
+			document.getElementById('selected-files').innerHTML =
+				options.files.length +
+				' files selected. <u>Click to view/edit.</u>';
+	} else
+		document.getElementById('selected-files').innerHTML =
+			'No files selected';
+	if (options.version === 'latest')
+		document
+			.getElementById('version')
+			.setAttribute('uk-tooltip', 'Latest version');
+	else if (options.version === 'old')
+		document
+			.getElementById('version')
+			.setAttribute(
+				'uk-tooltip',
+				'Newer version available, click to view'
+			);
 	document.getElementById('port').value = options.port;
 }
