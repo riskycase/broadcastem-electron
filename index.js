@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 
 const control = require('./electron-scripts/control.js');
 const preferences = require('./electron-scripts/preferences.js');
@@ -12,9 +12,12 @@ function createWindow() {
 		resizable: false,
 		fullscreenable: false,
 		webPreferences: {
+			devtools: false,
 			nodeIntegration: true,
 		},
 	});
+
+	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
 	win.setMenuBarVisibility(false);
 
