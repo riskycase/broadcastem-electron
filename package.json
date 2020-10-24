@@ -15,7 +15,7 @@
 	"dependencies": {
 		"broadcastem-core": "^3.0.0",
 		"electron-store": "^6.0.1",
-		"uikit": "^3.5.8"
+		"uikit": "^3.5.9"
 	},
 	"devDependencies": {
 		"electron": "^10.1.4",
