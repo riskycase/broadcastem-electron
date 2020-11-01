@@ -23,125 +23,161 @@
 		<title>Broadcast 'em - Electron</title>
 	</head>
 
-	<body class="uk-background-secondary uk-light">
-		<style>
-			.child {
-				width: 20px;
-				height: 20px;
-				display: inline-block;
-				margin: auto 10px;
-			}
-			.circle {
-				border-radius: 50%;
-			}
-			.colored {
-				background-color: #156b39;
-			}
-			@keyframes element1 {
-				0%,
-				2% {
-					transform: rotate(0deg);
-					transform-origin: 150% 50%;
-				}
-				25% {
-					transform: rotate(90deg);
-					transform-origin: 150% 50%;
-				}
-				48%,
-				98%,
-				100% {
-					transform: rotate(180deg);
-					transform-origin: 150% 50%;
-				}
-			}
-			@keyframes element2 {
-				0%,
-				2% {
-					transform: rotate(180deg);
-					transform-origin: 150% 50%;
-				}
-				25% {
-					transform: rotate(270deg);
-					transform-origin: 150% 50%;
-				}
-				48% {
-					transform: rotate(360deg);
-					transform-origin: 150% 50%;
-				}
-				52% {
-					transform: rotate(360deg);
-					transform-origin: 250% 50%;
-				}
-				75% {
-					transform: rotate(450deg);
-					transform-origin: 250% 50%;
-				}
-				98%,
-				100% {
-					transform: rotate(540deg);
-					transform-origin: 250% 50%;
-				}
-			}
-			@keyframes element3 {
-				0%,
-				52% {
-					transform: rotate(180deg);
-					transform-origin: 250% 50%;
-				}
-				75% {
-					transform: rotate(270deg);
-					transform-origin: 250% 50%;
-				}
-				98%,
-				100% {
-					transform: rotate(360deg);
-					transform-origin: 250% 50%;
-				}
-			}
-		</style>
-		<span
-			id="message"
-			class="uk-text-center uk-align-center uk-text-large"
-			style="
-				position: absolute;
-				margin-top: calc(50vh + 60px);
-				left: 0;
-				right: 0;
-			"
-			>Loading</span
-		>
+	<body
+		class="uk-background-secondary uk-light"
+		style="background-color: #888"
+	>
+		<header id="header" style="display: none">
+			<div class="uk-navbar-container uk-light uk-text-large">
+				<nav
+					id="banner"
+					class="uk-navbar uk-padding-small background-light-blue"
+					uk-navbar
+				>
+					<div class="uk-navbar-center">
+						<div
+							class="uk-navbar-logo"
+							style="color: #fff; margin: 10px 0"
+							id="title"
+						>
+							Broadcast 'em
+						</div>
+					</div>
+					<div class="uk-navbar-right" id="button-group">
+						<a
+							id="preferences"
+							class="uk-icon-link"
+							uk-icon="icon: settings; ratio: 1.3"
+						></a>
+					</div>
+				</nav>
+			</div>
+		</header>
 		<div
-			id="loading-container"
-			style="
-				width: 120px;
-				position: absolute;
-				margin-top: calc(50vh - 20px);
-				left: 0;
-				right: 0;
-			"
-			class="uk-align-center"
+			id="main"
+			class="uk-card uk-padding-small uk-height-expand"
+			style="height: calc(100vh - 56px)"
 		>
-			<div
-				class="element1 circle child colored"
+			<style>
+				.child {
+					width: 20px;
+					height: 20px;
+					display: inline-block;
+					margin: auto 10px;
+				}
+				.circle {
+					border-radius: 50%;
+				}
+				.colored {
+					background-color: #156b39;
+				}
+				@keyframes element1 {
+					0%,
+					2% {
+						transform: rotate(0deg);
+						transform-origin: 150% 50%;
+					}
+					25% {
+						transform: rotate(90deg);
+						transform-origin: 150% 50%;
+					}
+					48%,
+					98%,
+					100% {
+						transform: rotate(180deg);
+						transform-origin: 150% 50%;
+					}
+				}
+				@keyframes element2 {
+					0%,
+					2% {
+						transform: rotate(180deg);
+						transform-origin: 150% 50%;
+					}
+					25% {
+						transform: rotate(270deg);
+						transform-origin: 150% 50%;
+					}
+					48% {
+						transform: rotate(360deg);
+						transform-origin: 150% 50%;
+					}
+					52% {
+						transform: rotate(360deg);
+						transform-origin: 250% 50%;
+					}
+					75% {
+						transform: rotate(450deg);
+						transform-origin: 250% 50%;
+					}
+					98%,
+					100% {
+						transform: rotate(540deg);
+						transform-origin: 250% 50%;
+					}
+				}
+				@keyframes element3 {
+					0%,
+					52% {
+						transform: rotate(180deg);
+						transform-origin: 250% 50%;
+					}
+					75% {
+						transform: rotate(270deg);
+						transform-origin: 250% 50%;
+					}
+					98%,
+					100% {
+						transform: rotate(360deg);
+						transform-origin: 250% 50%;
+					}
+				}
+			</style>
+			<span
+				id="message"
+				class="uk-text-center uk-align-center uk-text-large"
 				style="
-					animation: element1 2s linear 0s infinite;
 					position: absolute;
+					margin-top: calc(50vh + 60px);
+					left: 0;
+					right: 0;
+					color: #fff;
 				"
-			></div>
+				>Loading</span
+			>
 			<div
-				class="element2 circle child colored"
+				id="loading-container"
 				style="
-					animation: element2 2s linear 0s infinite;
+					width: 120px;
 					position: absolute;
+					margin-top: calc(50vh - 20px);
+					left: 0;
+					right: 0;
 				"
-			></div>
-			<div
-				class="element3 circle child colored"
-				style="
-					animation: element3 2s linear 0s infinite;
-					position: absolute;
-				"
-			></div>
+				class="uk-align-center"
+			>
+				<div
+					class="element1 circle child colored"
+					style="
+						animation: element1 2s linear 0s infinite;
+						position: absolute;
+					"
+				></div>
+				<div
+					class="element2 circle child colored"
+					style="
+						animation: element2 2s linear 0s infinite;
+						position: absolute;
+					"
+				></div>
+				<div
+					class="element3 circle child colored"
+					style="
+						animation: element3 2s linear 0s infinite;
+						position: absolute;
+					"
+				></div>
+			</div>
 		</div>
 	</body>
 </html>

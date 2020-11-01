@@ -1,17 +1,20 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path');
+const fs = require('fs').promises;
 
 const control = require('./electron-scripts/control.js');
 const preferences = require('./electron-scripts/preferences.js');
+const home = require('./electron-scripts/home.js');
 const server = require('./electron-scripts/server.js');
 
 function createWindow() {
 	// Create the browser window.
 	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		resizable: false,
-		fullscreenable: false,
+		minWidth: 360,
+		minHeight: 640,
+		title: `Broadcast 'em - Electron`,
+		resizable: true,
+		fullscreenable: true,
 		webPreferences: {
 			devtools: false,
 			nodeIntegration: true,
@@ -21,12 +24,38 @@ function createWindow() {
 	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 	win.setMenuBarVisibility(false);
 
-	win.loadFile(
-		path.resolve(__dirname, './electron-views/container.html')
-	).then(() => {
-		preferences.setContents(win.webContents);
-		control.loadControl();
-	});
+	win.loadFile(path.resolve(__dirname, './electron-views/container.html'))
+		.then(
+			win.webContents
+				.executeJavaScript(`document.body.setAttribute('class', '${
+				preferences.store.get('darkMode')
+					? 'uk-background-secondary uk-light'
+					: 'uk-dark'
+			}');
+	document.getElementById('banner').setAttribute('class', 'uk-navbar uk-padding-small background-${preferences.store.get(
+		'color'
+	)}')`)
+		)
+		.then(() =>
+			fs.readFile(
+				path.resolve(__dirname, './electron-views/home.html'),
+				'utf8'
+			)
+		)
+		.then(html =>
+			win.webContents
+				.executeJavaScript(`document.getElementById('header').style.display = 'block';
+	document.body.style.removeProperty('background-color');
+	let script = document.createElement('script');
+	script.src = './home.js';
+	script.id = 'script';
+	document.body.appendChild(script);
+	document.getElementById('main').innerHTML = \`${html}\`;`)
+		);
+	// .then(() => {
+	// preferences.setContents(win.webContents);
+	// control.loadControl();
+	// });
 }
 
 // This method will be called when Electron has finished
