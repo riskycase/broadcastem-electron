@@ -24,8 +24,8 @@
 	</head>
 
 	<body class="uk-background-secondary uk-light">
-		<header>
-			<div class="uk-navbar-container uk-light">
+		<header id="header">
+			<div class="uk-navbar-container uk-light uk-text-large">
 				<nav
 					id="banner"
 					class="uk-navbar uk-padding-small background-light-blue"
@@ -33,13 +33,14 @@
 				>
 					<div class="uk-navbar-center">
 						<div
-							class="uk-navbar-logo uk-text-large"
-							style="color: #fff"
+							class="uk-navbar-logo"
+							style="color: #fff; margin: 10px 0"
+							id="title"
 						>
-							Broadcast 'em - Control Panel
+							Broadcast 'em
 						</div>
 					</div>
-					<div class="uk-navbar-right">
+					<div class="uk-navbar-right" id="button-group">
 						<a
 							id="preferences"
 							class="uk-icon-link"
@@ -49,11 +50,10 @@
 				</nav>
 			</div>
 		</header>
-
 		<div
 			id="main"
 			class="uk-card uk-padding-small uk-height-expand"
-			uk-grid
+			style="height: calc(100vh - 56px)"
 		>
 			<div id="files" class="uk-width-1-1">
 				<button

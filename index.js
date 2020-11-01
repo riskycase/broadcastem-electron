@@ -1,11 +1,9 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const fs = require('fs').promises;
 
-const control = require('./electron-scripts/control.js');
+const navigator = require('./electron-scripts/navigator.js');
 const preferences = require('./electron-scripts/preferences.js');
-const home = require('./electron-scripts/home.js');
-const server = require('./electron-scripts/server.js');
 
 function createWindow() {
 	// Create the browser window.
@@ -20,6 +18,8 @@ function createWindow() {
 			nodeIntegration: true,
 		},
 	});
+
+	navigator.initialise(win.id);
 
 	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 	win.setMenuBarVisibility(false);
@@ -36,26 +36,7 @@ function createWindow() {
 		'color'
 	)}')`)
 		)
-		.then(() =>
-			fs.readFile(
-				path.resolve(__dirname, './electron-views/home.html'),
-				'utf8'
-			)
-		)
-		.then(html =>
-			win.webContents
-				.executeJavaScript(`document.getElementById('header').style.display = 'block';
-	document.body.style.removeProperty('background-color');
-	let script = document.createElement('script');
-	script.src = './home.js';
-	script.id = 'script';
-	document.body.appendChild(script);
-	document.getElementById('main').innerHTML = \`${html}\`;`)
-		);
-	// .then(() => {
-	// preferences.setContents(win.webContents);
-	// control.loadControl();
-	// });
+		.then(() => navigator.load('home'));
 }
 
 // This method will be called when Electron has finished
@@ -68,7 +49,6 @@ app.on('window-all-closed', () => {
 	// On macOS it is common for applications and their menu bar
 	// to stay active until the user quits explicitly with Cmd + Q
 	if (process.platform !== 'darwin') {
-		server.killServer();
 		app.quit();
 	}
 });
