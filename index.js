@@ -9,6 +9,7 @@ function createWindow() {
 	const win = new BrowserWindow({
 		minWidth: 360,
 		minHeight: 640,
+		title: `Broadcast'em Electron`,
 		resizable: true,
 		fullscreenable: true,
 		webPreferences: {

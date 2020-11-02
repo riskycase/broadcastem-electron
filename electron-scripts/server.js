@@ -1,5 +1,6 @@
 const http = require('http');
 const os = require('os');
+const { BrowserWindow } = require('electron');
 
 const preferences = require('./preferences.js');
 const core = require('broadcastem-core');
