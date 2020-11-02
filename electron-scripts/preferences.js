@@ -53,14 +53,15 @@ module.exports.getContents = () => contents;
 
 module.exports.loadPreferences = function (receivedContents = contents) {
 	contents = receivedContents;
-	BrowserWindow.fromWebContents(contents)
-		.loadFile(path.resolve(__dirname, '../electron-views/preferences.html'))
-		.then(() => {
-			contents.send('load', {
-				color: store.get('color'),
-				darkMode: store.get('darkMode'),
-			});
-		});
+	BrowserWindow.fromWebContents(contents).loadURL(
+		`file://${path.resolve(
+			__dirname,
+			'../electron-views/preferences.html'
+		)}?preferences=${JSON.stringify({
+			color: store.get('color'),
+			darkMode: store.get('darkMode'),
+		})}`
+	);
 };
 
 ipcMain.on('input', (event, element, object) => {
