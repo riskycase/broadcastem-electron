@@ -7,17 +7,17 @@ const server = require('./electron-scripts/server.js');
 function createWindow() {
 	// Create the browser window.
 	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		resizable: false,
-		fullscreenable: false,
+		minWidth: 360,
+		minHeight: 640,
+		resizable: true,
+		fullscreenable: true,
 		webPreferences: {
 			devtools: false,
 			nodeIntegration: true,
 		},
 	});
 
-	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
+	//win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
 	win.setMenuBarVisibility(false);
 

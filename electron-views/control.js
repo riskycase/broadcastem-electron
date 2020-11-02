@@ -1,5 +1,11 @@
 const { ipcRenderer } = require('electron');
 
+const url = new URL(window.location.href);
+
+parseOptions(JSON.parse(url.searchParams.get('options')));
+refresh(url.searchParams.get('refreshNeeded'));
+document.getElementById('version').innerHTML = url.searchParams.get('version');
+
 document.getElementById('preferences').addEventListener('click', () => {
 	ipcRenderer.send('input', 'preferences');
 });
@@ -96,12 +102,6 @@ ipcRenderer.on('refresh', (event, message) => {
 	refresh(message);
 });
 
-ipcRenderer.on('load', (event, message) => {
-	parseOptions(message.options);
-	refresh(message.refreshNeeded);
-	document.getElementById('version').innerHTML = message.version;
-});
-
 function refresh(refreshNeeded) {
 	if (refreshNeeded === 'needed') {
 		document.getElementById('refresh-server').style.display =
@@ -115,6 +115,7 @@ function refresh(refreshNeeded) {
 }
 
 function parseOptions(options) {
+	console.log(options);
 	document.getElementById('selected-dest').innerHTML = options.dest;
 	if (options.list !== '')
 		document.getElementById('selected-list').innerHTML = options.list;

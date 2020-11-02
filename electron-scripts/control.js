@@ -27,16 +27,15 @@ module.exports.refreshNeeded = () => (refreshNeeded = true);
 
 module.exports.loadControl = function () {
 	BrowserWindow.fromWebContents(preferences.getContents())
-		.loadFile(path.resolve(__dirname, '../electron-views/control.html'))
+		.loadURL(
+			`file://${path.resolve(
+				__dirname,
+				'../electron-views/control.html'
+			)}?options=${JSON.stringify(server.options)}&refreshNeeded=${
+				refreshNeeded && server.isServerListening() ? 'needed' : 'done'
+			}&version=${app.getVersion()}`
+		)
 		.then(() => {
-			preferences.getContents().send('load', {
-				options: server.options,
-				refreshNeeded:
-					refreshNeeded && server.isServerListening()
-						? 'needed'
-						: 'done',
-				version: app.getVersion(),
-			});
 			if (server.isServerListening()) server.serverListening();
 		});
 };
