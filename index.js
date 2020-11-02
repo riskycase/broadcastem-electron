@@ -1,4 +1,5 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
+const path = require('path');
 
 const control = require('./electron-scripts/control.js');
 const preferences = require('./electron-scripts/preferences.js');
@@ -18,13 +19,12 @@ function createWindow() {
 		},
 	});
 
+	win.setMenuBarVisibility(false);
 	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
-	win.setMenuBarVisibility(false);
-
-	preferences.setId(win.id);
-
-	control.loadControl();
+	win.loadFile(path.resolve(__dirname, 'electron-views/loading.html'))
+		.then(() => preferences.setId(win.id))
+		.then(control.loadControl);
 }
 
 // This method will be called when Electron has finished
