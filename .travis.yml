@@ -16,26 +16,6 @@ jobs:
 
           before_cache:
               - rm -rf $HOME/.cache/electron-builder/wine
-          os: osx
-          osx_image: xcode10.2
-          language: node_js
-          node_js: node
-          env:
-              - ELECTRON_CACHE=$HOME/.cache/electron
-              - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-          script:
-              - yarn install
-              - yarn build
-
-        - stage: Build
-          cache:
-              directories:
-                  - node_modules
-                  - $HOME/.cache/electron
-                  - $HOME/.cache/electron-builder
-
-          before_cache:
-              - rm -rf $HOME/.cache/electron-builder/wine
           os: linux
           services: docker
           language: generic
@@ -140,4 +120,4 @@ jobs:
 
 env:
     global:
-        secure: 'GJhBwjOG+vSxe0yQW2GyCXsapISsEhNQxVzKM8P5mVTtMBpy+/eaRgwhbdiNfZ5umqrj4rlKyr0EvhcC4nCdpEZ3pGad7F8LZGeRf8Z/sEFuAOrCl/q5ek0z2PDXwYqgxi1WcOGRFlGAGPu9Rb0jHeD/YS+/E7xpdeZoc4OEYen6IlMIDKubvuI6E8hCbA5QIg/4vozF/kK6tUJ2BWMQsxwiaPVLMQKrUr065x2o20EqDnanP/Bm/aeUVipwWIlGEKkSuO0DeGUbNPXI5nOzZqjl8GUd/rvZ46nyWjdZT2OR1j1qCAI1qgiLM4i3DqTgR320ITR/30YHze1z4IuJgmBp5sjlJ0/LazDuId8XcTDqxTQIEWH22hpoN9FOdB4ATAIZ8lNNgBUNn1Y/9RJ0ex7QEi0nJ4Tw4LeiAvYelSz2q+Utnx9h9VN1qpCGpRekdp1LK0I2gAkjPb3ISsC1+0y2fkhUyNergqNIKB1gN5Hy+oudtp2Iuvp8SrGQ31GMrtQO0hYz9leIbRUQGi86FwRk+9OQp6LZyLZZNSpHNLQaQjLFkMt+BmkzuC3CTMtDPKzlCiq324HoEvC3JEO47MtxQGqf5sJkPX4jbwwpJP0YqqyZHWb4ufsOy697Y4CAGk5jlnUb4QvIDSfF5oghy53tJSdz/6ilcwgHFG+3/Rw='
+        secure: jGCTsEnWB8XZ45Gi3vzpJIQQ6WaB4vEU5yLqbwMebYJ9J76CD3qd1hd0z5vLdxqCykR02o9GCrVdeYE1mT+1oPBvTos4ywO2qApAy3inQfF5H7prkhVx/rTXiod7eH9WJkFsaYbfQ29JvlOrnD3H5algBCu1d28dWF2WydbHH7yo+p9YzbiFwoqucG/T5C0YDIEC2dWZwmhsCQmQzycxaZDQ6xgN+pFbDepFZVBHiRvsgqsGzRbDrRyO6Y0k+6t56e6J1xZ7iQnL9NJxBJdVTmtgCuMvyqAS4LINnc4Uva+nktZ4hXZxUkyK8+jv8yg2KWOAogiNq4VyDXtSV513v0ZSLAm39jJCYgsupT5FHjq0t3BC3YXXh3wFxbS9XmkBlYLsv89FRSWwtOo2hkctSsYfnYAyjxe8nPeeBH61bJ9InVYPqebyaXnC1QUWTYQCnbHs6dA+yIo+gNQHKXML8kgQsmUoPHibtNYGZ3pMWsxcNShTUICzkozqGMMmQ+fmZu/3cnZPjWuL4ECMMvZu3bETm01LDzNOo/Qvtl0JAm9JUqfZ9Dn3S7xGh2tB/tytNdR92zIPxPzJX/dAYms8BC4SRmfkcI9WEXdRUzel5bCYrOTm5xMgoJNOs1iyRiu2L6JBUxIrXLHEDCA2QRgJh9JMksXUh804K6Vm8BePaaA=
