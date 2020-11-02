@@ -33,7 +33,10 @@ module.exports.loadControl = function () {
 				'../electron-views/control.html'
 			)}?options=${JSON.stringify(server.options)}&refreshNeeded=${
 				refreshNeeded && server.isServerListening() ? 'needed' : 'done'
-			}&version=${app.getVersion()}`
+			}&version=${app.getVersion()}&theme=${JSON.stringify({
+				color: preferences.store.get('color'),
+				darkMode: preferences.store.get('darkMode'),
+			})}`
 		)
 		.then(() => {
 			if (server.isServerListening()) server.serverListening();

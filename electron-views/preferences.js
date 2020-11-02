@@ -1,7 +1,5 @@
 const { ipcRenderer } = require('electron');
 
-const url = new URL(window.location.href);
-
 loadPreferences(JSON.parse(url.searchParams.get('preferences')));
 
 document.getElementById('cancel').addEventListener('click', () => {

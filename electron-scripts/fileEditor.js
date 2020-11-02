@@ -30,8 +30,14 @@ function clearList() {
 module.exports.loadFileEditor = function () {
 	if (server.options.files.length) {
 		BrowserWindow.fromWebContents(preferences.getContents())
-			.loadFile(
-				path.resolve(__dirname, '../electron-views/fileEditor.html')
+			.loadURL(
+				`file://${path.resolve(
+					__dirname,
+					'../electron-views/fileEditor.html'
+				)}?theme=${JSON.stringify({
+					color: preferences.store.get('color'),
+					darkMode: preferences.store.get('darkMode'),
+				})}`
 			)
 			.then(() => {
 				createCards();

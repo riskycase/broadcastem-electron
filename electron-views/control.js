@@ -1,7 +1,5 @@
 const { ipcRenderer } = require('electron');
 
-const url = new URL(window.location.href);
-
 parseOptions(JSON.parse(url.searchParams.get('options')));
 refresh(url.searchParams.get('refreshNeeded'));
 document.getElementById('version').innerHTML = url.searchParams.get('version');
@@ -115,7 +113,6 @@ function refresh(refreshNeeded) {
 }
 
 function parseOptions(options) {
-	console.log(options);
 	document.getElementById('selected-dest').innerHTML = options.dest;
 	if (options.list !== '')
 		document.getElementById('selected-list').innerHTML = options.list;

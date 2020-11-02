@@ -1,5 +1,9 @@
 let color, darkMode;
 
+const url = new URL(window.location.href);
+
+applyTheme(JSON.parse(url.searchParams.get('theme')));
+
 function applyTheme(theme) {
 	if (theme.darkMode) {
 		document.body.setAttribute('class', 'uk-background-secondary uk-light');

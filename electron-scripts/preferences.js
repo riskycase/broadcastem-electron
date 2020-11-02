@@ -38,16 +38,7 @@ const store = new Store({
 
 module.exports.store = store;
 
-module.exports.setContents = receivedContents => {
-	contents = receivedContents;
-	contents.on('did-finish-load', () => {
-		contents.executeJavaScript(
-			`applyTheme({color: '${store.get('color')}',darkMode: ${store.get(
-				'darkMode'
-			)}})`
-		);
-	});
-};
+module.exports.setContents = receivedContents => (contents = receivedContents);
 
 module.exports.getContents = () => contents;
 
@@ -58,6 +49,9 @@ module.exports.loadPreferences = function (receivedContents = contents) {
 			__dirname,
 			'../electron-views/preferences.html'
 		)}?preferences=${JSON.stringify({
+			color: store.get('color'),
+			darkMode: store.get('darkMode'),
+		})}&theme=${JSON.stringify({
 			color: store.get('color'),
 			darkMode: store.get('darkMode'),
 		})}`
