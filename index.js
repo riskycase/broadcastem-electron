@@ -17,11 +17,11 @@ function createWindow() {
 		},
 	});
 
-	//win.webContents.on('devtools-opened', win.webContents.closeDevTools);
+	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
 	win.setMenuBarVisibility(false);
 
-	preferences.setContents(win.webContents);
+	preferences.setId(win.id);
 
 	control.loadControl();
 }

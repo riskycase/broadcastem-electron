@@ -5,7 +5,7 @@ const Store = require('electron-store');
 
 const control = require('./control.js');
 
-let contents;
+let id;
 
 let key = `${os.userInfo().username} ${os.version} ${os.arch()}`;
 
@@ -38,13 +38,12 @@ const store = new Store({
 
 module.exports.store = store;
 
-module.exports.setContents = receivedContents => (contents = receivedContents);
+module.exports.setId = receivedId => (id = receivedId);
 
-module.exports.getContents = () => contents;
+module.exports.getId = () => id;
 
-module.exports.loadPreferences = function (receivedContents = contents) {
-	contents = receivedContents;
-	BrowserWindow.fromWebContents(contents).loadURL(
+module.exports.loadPreferences = function () {
+	BrowserWindow.fromId(id).loadURL(
 		`file://${path.resolve(
 			__dirname,
 			'../electron-views/preferences.html'

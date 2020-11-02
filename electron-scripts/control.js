@@ -26,7 +26,7 @@ require('https').get(
 module.exports.refreshNeeded = () => (refreshNeeded = true);
 
 module.exports.loadControl = function () {
-	BrowserWindow.fromWebContents(preferences.getContents())
+	BrowserWindow.fromId(preferences.getId())
 		.loadURL(
 			`file://${path.resolve(
 				__dirname,
@@ -83,7 +83,10 @@ function shareSelector(type) {
 			if (!result.canceled) {
 				result.filePaths.forEach(pushUnique);
 			}
-			preferences.getContents().send('update', server.options);
+			BrowserWindow.fromId(preferences.getId()).webContents.send(
+				'update',
+				server.options
+			);
 		});
 }
 
@@ -105,7 +108,10 @@ function listSelector() {
 		.then(result => {
 			if (!result.canceled) server.options.list = result.filePaths[0];
 			else server.options.list = '';
-			preferences.getContents().send('update', server.options);
+			BrowserWindow.fromId(preferences.getId()).webContents.send(
+				'update',
+				server.options
+			);
 		});
 }
 
@@ -125,7 +131,10 @@ function destSelector() {
 		.then(result => {
 			if (!result.canceled) server.options.dest = result.filePaths[0];
 			else server.options.dest = app.getPath('downloads');
-			preferences.getContents().send('update', server.options);
+			BrowserWindow.fromId(preferences.getId()).webContents.send(
+				'update',
+				server.options
+			);
 		});
 }
 

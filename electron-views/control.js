@@ -119,7 +119,6 @@ function parseOptions(options) {
 	else
 		document.getElementById('selected-list').innerHTML =
 			'No list file selected!';
-	document.getElementById('version').innerHTML = options.port;
 	if (options.files.length) {
 		if (options.files.length === 1)
 			document.getElementById('selected-files').innerHTML =
