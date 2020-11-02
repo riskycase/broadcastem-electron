@@ -21,7 +21,7 @@ function createWindow() {
 
 	navigator.initialise(win.id);
 
-	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
+	// win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 	win.setMenuBarVisibility(false);
 
 	win.loadFile(path.resolve(__dirname, './electron-views/container.html'))
@@ -34,7 +34,10 @@ function createWindow() {
 			}');
 	document.getElementById('banner').setAttribute('class', 'uk-navbar uk-padding-small background-${preferences.store.get(
 		'color'
-	)}')`)
+	)}');
+	document.getElementById('header').style.display = 'block';
+	document.body.style.removeProperty('background-color');
+	`)
 		)
 		.then(() => navigator.load('home'));
 }

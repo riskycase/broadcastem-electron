@@ -7,6 +7,7 @@
 		id="send"
 		class="uk-button uk-button-default uk-margin-small-left"
 		uk-tooltip="title: Start a server to share files; pos: bottom"
+		onclick="document.getElementById('left-button-group').style.display = 'flex';ipcRenderer.send('home', 'send');"
 	>
 		<span
 			uk-icon="icon: upload; ratio: 1"
@@ -21,6 +22,7 @@
 		id="receive"
 		class="uk-button uk-button-default uk-margin-small-right"
 		uk-tooltip="title: Connect to a server and download files; pos: bottom"
+		onclick="document.getElementById('left-button-group').style.display = 'flex';ipcRenderer.send('home', 'receive');"
 	>
 		<span
 			uk-icon="icon: download; ratio: 1"

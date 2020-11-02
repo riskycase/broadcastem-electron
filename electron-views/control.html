@@ -1,155 +1,86 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Required meta tags-->
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<!-- UIkit CSS-->
-		<link
-			rel="stylesheet"
-			href="../node_modules/uikit/dist/css/uikit.css"
-		/>
-		<link rel="stylesheet" href="./uikit-extentions.css" />
-		<!-- UIkit JS-->
-		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
-		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
+<div id="files" class="uk-width-1-1">
+	<button
+		id="file-select"
+		class="uk-button uk-button-default"
+		uk-tooltip="title: Select the files you would like to share; pos: bottom"
+	>
+		Select files
+	</button>
 
-		<!-- Theme JS-->
-		<script src="./theme.js"></script>
+	<button
+		id="folder-select"
+		class="uk-button uk-button-default"
+		uk-tooltip="title: Select the folders you would like to share (will be shared as zip files); pos: bottom"
+	>
+		Select folders
+	</button>
 
-		<title>Broadcast 'em - Control Panel</title>
-	</head>
+	<div id="selected-files">No files selected</div>
+</div>
 
-	<body class="uk-background-secondary uk-light">
-		<header id="header">
-			<div class="uk-navbar-container uk-light uk-text-large">
-				<nav
-					id="banner"
-					class="uk-navbar uk-padding-small background-light-blue"
-					uk-navbar
-				>
-					<div class="uk-navbar-center">
-						<div
-							class="uk-navbar-logo"
-							style="color: #fff; margin: 10px 0"
-							id="title"
-						>
-							Broadcast 'em
-						</div>
-					</div>
-					<div class="uk-navbar-right" id="button-group">
-						<a
-							id="preferences"
-							class="uk-icon-link"
-							uk-icon="icon: settings; ratio: 1.3"
-						></a>
-					</div>
-				</nav>
-			</div>
-		</header>
-		<div
-			id="main"
-			class="uk-card uk-padding-small uk-height-expand"
-			style="height: calc(100vh - 56px)"
-		>
-			<div id="files" class="uk-width-1-1">
-				<button
-					id="file-select"
-					class="uk-button uk-button-default"
-					uk-tooltip="title: Select the files you would like to share; pos: bottom"
-				>
-					Select files
-				</button>
+<div id="list" class="uk-width-1-1">
+	<button
+		id="list-select"
+		class="uk-button uk-button-default uk-margin-right"
+		uk-tooltip="title: Select the file which contains a newline-seperated list of paths to the files/folders you would like to share; pos: right"
+	>
+		Select list file
+	</button>
 
-				<button
-					id="folder-select"
-					class="uk-button uk-button-default"
-					uk-tooltip="title: Select the folders you would like to share (will be shared as zip files); pos: bottom"
-				>
-					Select folders
-				</button>
+	<span id="selected-list">No list file selected!</span>
+</div>
 
-				<div id="selected-files">No files selected</div>
-			</div>
+<div id="destination" class="uk-width-1-1">
+	<button
+		id="dest-select"
+		class="uk-button uk-button-default uk-margin-right"
+		uk-tooltip="title: Select the folder where you want the incoming files to be saved; pos: right"
+	>
+		Select upload folder
+	</button>
 
-			<div id="list" class="uk-width-1-1">
-				<button
-					id="list-select"
-					class="uk-button uk-button-default uk-margin-right"
-					uk-tooltip="title: Select the file which contains a newline-seperated list of paths to the files/folders you would like to share; pos: right"
-				>
-					Select list file
-				</button>
+	<span id="selected-dest">Current</span>
+</div>
 
-				<span id="selected-list">No list file selected!</span>
-			</div>
+<div id="port-info" class="uk-width-1-1">
+	<span>Port: </span>
 
-			<div id="destination" class="uk-width-1-1">
-				<button
-					id="dest-select"
-					class="uk-button uk-button-default uk-margin-right"
-					uk-tooltip="title: Select the folder where you want the incoming files to be saved; pos: right"
-				>
-					Select upload folder
-				</button>
+	<input
+		id="port"
+		type="number"
+		value="3000"
+		min="0"
+		class="uk-margin-left uk-input uk-width-auto"
+		uk-tooltip="title: Select the port where the server should listen; pos: right"
+	/>
+</div>
 
-				<span id="selected-dest">Current</span>
-			</div>
+<div id="server-control">
+	<button id="start-server" class="uk-button uk-button-success">
+		Start Server
+	</button>
+	<button
+		id="kill-server"
+		class="uk-button uk-button-danger"
+		style="display: none"
+	>
+		Kill Server
+	</button>
+	<button
+		id="refresh-server"
+		class="uk-button uk-button-info"
+		style="display: none"
+	>
+		Refresh Server
+	</button>
 
-			<div id="port-info" class="uk-width-1-1">
-				<span>Port: </span>
+	<span id="server-refresh" style="display: none"
+		>Options have been modified, refresh server to apply these changes</span
+	>
 
-				<input
-					id="port"
-					type="number"
-					value="3000"
-					min="0"
-					class="uk-margin-left uk-input uk-width-auto"
-					uk-tooltip="title: Select the port where the server should listen; pos: right"
-				/>
-			</div>
-
-			<div id="server-control">
-				<button id="start-server" class="uk-button uk-button-success">
-					Start Server
-				</button>
-				<button
-					id="kill-server"
-					class="uk-button uk-button-danger"
-					style="display: none"
-				>
-					Kill Server
-				</button>
-				<button
-					id="refresh-server"
-					class="uk-button uk-button-info"
-					style="display: none"
-				>
-					Refresh Server
-				</button>
-
-				<span id="server-refresh" style="display: none"
-					>Options have been modified, refresh server to apply these
-					changes</span
-				>
-
-				<div id="message"></div>
-				<div
-					id="ip-address"
-					uk-tooltip="title: Enter this address into the URL bar of the browser in the device connected to respective network"
-				></div>
-			</div>
-		</div>
-
-		<span
-			class="uk-flex uk-flex-right uk-link-text"
-			style="position: absolute; bottom: 10px; width: calc(100vw - 10px)"
-			>v<a id="version" onclick="openReleases()">1.0.0</a></span
-		>
-
-		<script src="./control.js"></script>
-	</body>
-</html>
+	<div id="message"></div>
+	<div
+		id="ip-address"
+		uk-tooltip="title: Enter this address into the URL bar of the browser in the device connected to respective network"
+	></div>
+</div>

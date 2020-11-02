@@ -3,6 +3,8 @@ const path = require('path');
 const os = require('os');
 const Store = require('electron-store');
 
+const navigator = require('./navigator.js');
+
 let key = `${os.userInfo().username} ${os.version} ${os.arch()}`;
 
 const store = new Store({
@@ -33,3 +35,10 @@ const store = new Store({
 });
 
 module.exports.store = store;
+
+module.exports.load = () => {
+	BrowserWindow.fromId(navigator.getId()).webContents.send('load', {
+		darkMode: store.get('darkMode'),
+		color: store.get('color'),
+	});
+};
