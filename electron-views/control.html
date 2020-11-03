@@ -17,10 +17,7 @@
 		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
 		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
 
-		<!-- Theme JS-->
-		<script src="./theme.js"></script>
-
-		<title>Broadcast 'em - Control Panel</title>
+		<title>Broadcast 'em Electron</title>
 	</head>
 
 	<body class="uk-background-secondary uk-light">
@@ -36,7 +33,7 @@
 							class="uk-navbar-logo uk-text-large"
 							style="color: #fff"
 						>
-							Broadcast 'em - Control Panel
+							Broadcast 'em Electron
 						</div>
 					</div>
 					<div class="uk-navbar-right">
@@ -49,6 +46,9 @@
 				</nav>
 			</div>
 		</header>
+
+		<!-- Theme JS-->
+		<script src="./theme.js"></script>
 
 		<div
 			id="main"
@@ -75,7 +75,7 @@
 				<div id="selected-files">No files selected</div>
 			</div>
 
-			<div id="list" class="uk-width-1-1">
+			<div id="list" class="uk-width-1-1 uk-flex uk-flex-wrap">
 				<button
 					id="list-select"
 					class="uk-button uk-button-default uk-margin-right"
@@ -84,10 +84,10 @@
 					Select list file
 				</button>
 
-				<span id="selected-list">No list file selected!</span>
+				<div id="selected-list">No list file selected!</div>
 			</div>
 
-			<div id="destination" class="uk-width-1-1">
+			<div id="destination" class="uk-width-1-1 uk-flex uk-flex-wrap">
 				<button
 					id="dest-select"
 					class="uk-button uk-button-default uk-margin-right"
@@ -96,7 +96,7 @@
 					Select upload folder
 				</button>
 
-				<span id="selected-dest">Current</span>
+				<div id="selected-dest">Current</div>
 			</div>
 
 			<div id="port-info" class="uk-width-1-1">

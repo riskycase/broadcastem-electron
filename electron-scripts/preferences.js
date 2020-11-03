@@ -5,7 +5,7 @@ const Store = require('electron-store');
 
 const control = require('./control.js');
 
-let contents;
+let id;
 
 let key = `${os.userInfo().username} ${os.version} ${os.arch()}`;
 
@@ -38,29 +38,23 @@ const store = new Store({
 
 module.exports.store = store;
 
-module.exports.setContents = receivedContents => {
-	contents = receivedContents;
-	contents.on('did-finish-load', () => {
-		contents.executeJavaScript(
-			`applyTheme({color: '${store.get('color')}',darkMode: ${store.get(
-				'darkMode'
-			)}})`
-		);
-	});
-};
+module.exports.setId = receivedId => (id = receivedId);
 
-module.exports.getContents = () => contents;
+module.exports.getId = () => id;
 
-module.exports.loadPreferences = function (receivedContents = contents) {
-	contents = receivedContents;
-	BrowserWindow.fromWebContents(contents)
-		.loadFile(path.resolve(__dirname, '../electron-views/preferences.html'))
-		.then(() => {
-			contents.send('load', {
-				color: store.get('color'),
-				darkMode: store.get('darkMode'),
-			});
-		});
+module.exports.loadPreferences = function () {
+	BrowserWindow.fromId(id).loadURL(
+		`file://${path.resolve(
+			__dirname,
+			'../electron-views/preferences.html'
+		)}?preferences=${JSON.stringify({
+			color: store.get('color'),
+			darkMode: store.get('darkMode'),
+		})}&theme=${JSON.stringify({
+			color: store.get('color'),
+			darkMode: store.get('darkMode'),
+		})}`
+	);
 };
 
 ipcMain.on('input', (event, element, object) => {
