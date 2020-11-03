@@ -1,5 +1,9 @@
 const { ipcRenderer } = require('electron');
 
+parseOptions(JSON.parse(url.searchParams.get('options')));
+refresh(url.searchParams.get('refreshNeeded'));
+document.getElementById('version').innerHTML = url.searchParams.get('version');
+
 document.getElementById('preferences').addEventListener('click', () => {
 	ipcRenderer.send('input', 'preferences');
 });
@@ -10,10 +14,6 @@ document.getElementById('file-select').addEventListener('click', () => {
 
 document.getElementById('folder-select').addEventListener('click', () => {
 	ipcRenderer.send('input', 'folder-select');
-});
-
-document.getElementById('selected-files').addEventListener('click', () => {
-	ipcRenderer.send('click', 'selected-files');
 });
 
 document.getElementById('list-select').addEventListener('click', () => {
@@ -96,12 +96,6 @@ ipcRenderer.on('refresh', (event, message) => {
 	refresh(message);
 });
 
-ipcRenderer.on('load', (event, message) => {
-	parseOptions(message.options);
-	refresh(message.refreshNeeded);
-	document.getElementById('version').innerHTML = message.version;
-});
-
 function refresh(refreshNeeded) {
 	if (refreshNeeded === 'needed') {
 		document.getElementById('refresh-server').style.display =
@@ -121,15 +115,15 @@ function parseOptions(options) {
 	else
 		document.getElementById('selected-list').innerHTML =
 			'No list file selected!';
-	document.getElementById('version').innerHTML = options.port;
 	if (options.files.length) {
 		if (options.files.length === 1)
-			document.getElementById('selected-files').innerHTML =
-				'1 file selected. <u>Click to view/edit.</u>';
+			document.getElementById(
+				'selected-files'
+			).innerHTML = `1 file selected. <a onclick="ipcRenderer.send('click', 'selected-files');">Click to view/edit.</a>`;
 		else
 			document.getElementById('selected-files').innerHTML =
 				options.files.length +
-				' files selected. <u>Click to view/edit.</u>';
+				` files selected. <a onclick="ipcRenderer.send('click', 'selected-files');">Click to view/edit.</a>`;
 	} else
 		document.getElementById('selected-files').innerHTML =
 			'No files selected';

@@ -1,5 +1,6 @@
 const http = require('http');
 const os = require('os');
+const { BrowserWindow } = require('electron');
 
 const preferences = require('./preferences.js');
 const core = require('broadcastem-core');
@@ -64,11 +65,17 @@ module.exports.refreshServer = function () {
 		},
 		restart: false,
 	});
-	preferences.getContents().send('refresh', 'done');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'refresh',
+		'done'
+	);
 };
 
 module.exports.launchServer = function () {
-	preferences.getContents().send('status', 'initiating');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'initiating'
+	);
 	core.init({
 		input: options.files,
 		flags: {
@@ -86,7 +93,10 @@ module.exports.serverListening = serverListening;
 
 function optionsChanged() {
 	if (server && server.listening)
-		preferences.getContents().send('refresh', 'needed');
+		BrowserWindow.fromId(preferences.getId()).webContents.send(
+			'refresh',
+			'needed'
+		);
 }
 
 function getAddresses() {
@@ -100,24 +110,42 @@ function getAddresses() {
 }
 
 function createServer(app) {
-	preferences.getContents().send('status', 'initiated');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'initiated'
+	);
 	server = http.createServer(app);
-	preferences.getContents().send('status', 'created');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'created'
+	);
 	server.listen(options.port);
 	server.on('listening', serverListening);
 	server.on('error', serverErrored);
 }
 
 function serverListening() {
-	preferences.getContents().send('status', 'binded');
-	preferences.getContents().send('address', getAddresses());
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'binded'
+	);
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'address',
+		getAddresses()
+	);
 }
 
 function serverErrored(err) {
 	if (err.code === 'EADDRINUSE')
-		preferences.getContents().send('status', 'port-used');
+		BrowserWindow.fromId(preferences.getId()).webContents.send(
+			'status',
+			'port-used'
+		);
 	if (err.code === 'EACCES')
-		preferences.getContents().send('status', 'port-err');
+		BrowserWindow.fromId(preferences.getId()).webContents.send(
+			'status',
+			'port-err'
+		);
 }
 
 function killServer() {
@@ -125,7 +153,13 @@ function killServer() {
 }
 
 function destroyServer() {
-	preferences.getContents().send('status', 'closing');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'closing'
+	);
 	killServer();
-	preferences.getContents().send('status', 'closed');
+	BrowserWindow.fromId(preferences.getId()).webContents.send(
+		'status',
+		'closed'
+	);
 }

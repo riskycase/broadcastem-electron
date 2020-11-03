@@ -1,4 +1,5 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
+const path = require('path');
 
 const control = require('./electron-scripts/control.js');
 const preferences = require('./electron-scripts/preferences.js');
@@ -7,23 +8,23 @@ const server = require('./electron-scripts/server.js');
 function createWindow() {
 	// Create the browser window.
 	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
-		resizable: false,
-		fullscreenable: false,
+		minWidth: 360,
+		minHeight: 640,
+		title: `Broadcast'em Electron`,
+		resizable: true,
+		fullscreenable: true,
 		webPreferences: {
 			devtools: false,
 			nodeIntegration: true,
 		},
 	});
 
+	win.setMenuBarVisibility(false);
 	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
-	win.setMenuBarVisibility(false);
-
-	preferences.setContents(win.webContents);
-
-	control.loadControl();
+	win.loadFile(path.resolve(__dirname, 'electron-views/loading.html'))
+		.then(() => preferences.setId(win.id))
+		.then(control.loadControl);
 }
 
 // This method will be called when Electron has finished
