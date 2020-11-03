@@ -1,5 +1,7 @@
 const { ipcRenderer } = require('electron');
 
+loadPreferences(JSON.parse(url.searchParams.get('preferences')));
+
 document.getElementById('cancel').addEventListener('click', () => {
 	ipcRenderer.send('input', 'cancel');
 });
@@ -16,16 +18,16 @@ document.getElementById('author').addEventListener('click', () => {
 	ipcRenderer.send('input', 'author');
 });
 
-ipcRenderer.on('load', (event, theme) => {
-	if (theme.darkMode) {
+function loadPreferences(preferences) {
+	if (preferences.darkMode) {
 		document.getElementById('dark-mode-enable').setAttribute('hidden', '');
 		document.getElementById('dark-mode-disable').removeAttribute('hidden');
 	} else {
 		document.getElementById('dark-mode-enable').removeAttribute('hidden');
 		document.getElementById('dark-mode-disable').setAttribute('hidden', '');
 	}
-	setTheme(theme.color);
-});
+	setTheme(preferences.color);
+}
 
 UIkit.util.on('#dark-mode-enable', 'show', function () {
 	document.body.setAttribute('class', 'uk-dark');
