@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-electron",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Electron.js wrapper for broadcastem-core",
 	"main": "index.js",
 	"author": "Hrishikesh Patil",
@@ -13,12 +13,12 @@
 	},
 	"private": false,
 	"dependencies": {
-		"broadcastem-core": "^3.0.0",
+		"broadcastem-core": "^3.1.0",
 		"electron-store": "^6.0.1",
 		"uikit": "^3.5.9"
 	},
 	"devDependencies": {
-		"electron": "^10.1.4",
+		"electron": "^10.1.5",
 		"electron-builder": "^22.9.1",
 		"husky": "^4.3.0",
 		"prettier": "^2.1.2"

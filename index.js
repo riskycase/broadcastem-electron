@@ -20,7 +20,7 @@ function createWindow() {
 	});
 
 	win.setMenuBarVisibility(false);
-	//win.webContents.on('devtools-opened', win.webContents.closeDevTools);
+	win.webContents.on('devtools-opened', win.webContents.closeDevTools);
 
 	win.loadFile(path.resolve(__dirname, 'electron-views/loading.html'))
 		.then(() => preferences.setId(win.id))
