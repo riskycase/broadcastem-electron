@@ -16,10 +16,6 @@ document.getElementById('folder-select').addEventListener('click', () => {
 	ipcRenderer.send('input', 'folder-select');
 });
 
-document.getElementById('selected-files').addEventListener('click', () => {
-	ipcRenderer.send('click', 'selected-files');
-});
-
 document.getElementById('list-select').addEventListener('click', () => {
 	ipcRenderer.send('input', 'list-select');
 });
@@ -121,12 +117,13 @@ function parseOptions(options) {
 			'No list file selected!';
 	if (options.files.length) {
 		if (options.files.length === 1)
-			document.getElementById('selected-files').innerHTML =
-				'1 file selected. <u>Click to view/edit.</u>';
+			document.getElementById(
+				'selected-files'
+			).innerHTML = `1 file selected. <a onclick="ipcRenderer.send('click', 'selected-files');">Click to view/edit.</a>`;
 		else
 			document.getElementById('selected-files').innerHTML =
 				options.files.length +
-				' files selected. <u>Click to view/edit.</u>';
+				` files selected. <a onclick="ipcRenderer.send('click', 'selected-files');">Click to view/edit.</a>`;
 	} else
 		document.getElementById('selected-files').innerHTML =
 			'No files selected';

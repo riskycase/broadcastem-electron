@@ -17,7 +17,7 @@
 		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
 		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
 
-		<title>Broadcast 'em - Electron</title>
+		<title>Broadcast 'em Electron</title>
 		<style>
 			body {
 				overflow: hidden;
@@ -36,29 +36,7 @@
 					<div class="uk-navbar-left">
 						<div class="uk-text-large" style="color: #fff">
 							Currently sharing:<br />
-							<div class="uk-text-small">
-								Click on an item to open it or remove it from
-								the list using the link beside
-							</div>
 						</div>
-					</div>
-
-					<div class="uk-navbar-right">
-						<button
-							id="clear-all"
-							class="uk-button uk-button-default uk-margin-right-small"
-							uk-tooltip="title: Clear all the selected files from the list; pos: bottom"
-						>
-							Clear All
-						</button>
-
-						<button
-							id="done"
-							class="uk-button uk-button-default uk-margin-right-small"
-							uk-tooltip="title: Return to main menu; pos: bottom"
-						>
-							Done
-						</button>
 					</div>
 				</nav>
 			</div>
@@ -67,10 +45,28 @@
 		<!-- Theme JS-->
 		<script src="./theme.js"></script>
 
+		<div class="uk-padding-small">
+			<button
+				id="clear-all"
+				class="uk-button uk-button-default uk-margin-right-small"
+				uk-tooltip="title: Clear all the selected files from the list; pos: bottom"
+			>
+				Remove All
+			</button>
+
+			<button
+				id="done"
+				class="uk-button uk-button-default uk-margin-right-small"
+				uk-tooltip="title: Return to main menu; pos: bottom"
+			>
+				Done
+			</button>
+		</div>
+
 		<div
 			id="list"
 			class="uk-height-expand"
-			style="height: calc(100vh - 87px); overflow: auto"
+			style="overflow: auto; height: calc(100vh - 136px)"
 		></div>
 
 		<script src="./fileEditor.js"></script>

@@ -17,9 +17,23 @@
 		<script src="../node_modules/uikit/dist/js/uikit.js"></script>
 		<script src="../node_modules/uikit/dist/js/uikit-icons.js"></script>
 
-		<title>Broadcast 'em - Electron</title>
+		<title>Broadcast 'em Electron</title>
 
 		<style>
+			.swatch {
+				width: 50%;
+			}
+			@media only screen and (min-width: 640px) {
+				.swatch {
+					width: 25%;
+				}
+			}
+			@media only screen and (min-width: 1280px) {
+				.swatch {
+					width: 12.5%;
+					max-width: 160px;
+				}
+			}
 			[id^='banner-theme'] {
 				cursor: pointer;
 			}
@@ -55,24 +69,6 @@
 						>
 							Broadcast 'em - Preferences
 						</div>
-					</div>
-
-					<div class="uk-navbar-right uk-button-group" id="buttons">
-						<button
-							id="cancel"
-							class="uk-button uk-button-default uk-margin-right-small"
-							uk-tooltip="title: Ignore the changes made now and use the previous settings; pos: bottom"
-						>
-							Cancel
-						</button>
-
-						<button
-							id="save"
-							class="uk-button uk-button-default uk-margin-right-small"
-							uk-tooltip="title: Apply these settings to the app; pos: bottom"
-						>
-							Save
-						</button>
 					</div>
 				</nav>
 			</div>
@@ -114,67 +110,82 @@
 			>
 				<div class="uk-width-auto uk-margin-small-right">Banner:</div>
 
-				<div
-					class="uk-grid-collapse uk-child-width-1-4 uk-text-center"
-					uk-grid
-				>
+				<div class="uk-flex uk-flex-wrap">
 					<div
 						id="banner-theme-indigo"
-						class="uk-card uk-card-secondary uk-padding-small background-indigo"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-indigo"
 						onclick="setTheme('indigo')"
 					>
 						Indigo
 					</div>
 					<div
 						id="banner-theme-light-indigo"
-						class="uk-card uk-card-secondary uk-padding-small background-light-indigo"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-light-indigo"
 						onclick="setTheme('light-indigo')"
 					>
 						Light Indigo
 					</div>
 					<div
 						id="banner-theme-blue"
-						class="uk-card uk-card-secondary uk-padding-small background-blue"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-blue"
 						onclick="setTheme('blue')"
 					>
 						Blue
 					</div>
 					<div
 						id="banner-theme-light-blue"
-						class="uk-card uk-card-secondary uk-padding-small background-light-blue"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-light-blue"
 						onclick="setTheme('light-blue')"
 					>
 						Light Blue
 					</div>
 					<div
 						id="banner-theme-green"
-						class="uk-card uk-card-secondary uk-padding-small background-green"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-green"
 						onclick="setTheme('green')"
 					>
 						Green
 					</div>
 					<div
 						id="banner-theme-light-green"
-						class="uk-card uk-card-secondary uk-padding-small background-light-green"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-light-green"
 						onclick="setTheme('light-green')"
 					>
 						Light Green
 					</div>
 					<div
 						id="banner-theme-red"
-						class="uk-card uk-card-secondary uk-padding-small background-red"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-red"
 						onclick="setTheme('red')"
 					>
 						Red
 					</div>
 					<div
 						id="banner-theme-light-red"
-						class="uk-card uk-card-secondary uk-padding-small background-light-red"
+						class="uk-card uk-card-secondary uk-padding-small swatch background-light-red"
 						onclick="setTheme('light-red')"
 					>
 						Light Red
 					</div>
 				</div>
+			</div>
+
+			<div class="uk-button-group" id="buttons">
+				<button
+					id="cancel"
+					class="uk-button uk-button-default uk-margin-right-small"
+					uk-tooltip="title: Ignore the changes made now and use the previous settings; pos: bottom"
+				>
+					Cancel
+				</button>
+
+				<button
+					id="save"
+					class="uk-button uk-button-default uk-margin-right-small"
+					uk-tooltip="title: Apply these settings to the app; pos: bottom"
+				>
+					Save
+				</button>
 			</div>
 		</div>
 
