@@ -1,6 +1,6 @@
 {
 	"name": "broadcastem-electron",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Electron.js wrapper for broadcastem-core",
 	"main": "index.js",
 	"author": "Hrishikesh Patil",
