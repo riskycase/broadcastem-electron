@@ -1,3 +1,7 @@
+# 0.1.1
+
+-   Upgrade dependencies and devDependencies
+
 # 0.1.0
 
 -   Include new core version
