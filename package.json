@@ -13,7 +13,7 @@
 	},
 	"private": false,
 	"dependencies": {
-		"broadcastem-core": "^3.1.0",
+		"broadcastem-core": "^5.0.2",
 		"electron-store": "^6.0.1",
 		"uikit": "^3.6.17"
 	},
