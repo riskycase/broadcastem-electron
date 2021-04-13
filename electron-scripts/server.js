@@ -57,7 +57,7 @@ module.exports.killServer = killServer;
 module.exports.destroyServer = destroyServer;
 
 module.exports.refreshServer = function () {
-	core.init({
+	core({
 		input: options.files,
 		flags: {
 			destination: options.dest,
@@ -76,7 +76,7 @@ module.exports.launchServer = function () {
 		'status',
 		'initiating'
 	);
-	core.init({
+	core({
 		input: options.files,
 		flags: {
 			destination: options.dest,
