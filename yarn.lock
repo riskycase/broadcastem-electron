@@ -2478,10 +2478,15 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-uikit@^3.6.18, uikit@^3.6.5:
+uikit@^3.6.5:
   version "3.6.18"
   resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.6.18.tgz#5ee147b5de13ccd1ef32809a9f4e0551fd895da9"
   integrity sha512-q5Dlpu1KQ5Jo3cW9TCMypvG0KL6rVLcCat9JPHJ1HBzmSKnMh+oChhWWSq4OEGuopsIftKyiXuhdS8a50uIJbw==
+
+uikit@^3.9.4:
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.9.4.tgz#2565a5c0239f49d3a75bfa89c519d40c006e3c46"
+  integrity sha512-mrOr/k3a/6/VBXgnqmQFg0l2ipZyoTpULZZgJ0RVHZz97HNrc28KQsb24pl8wxtw+BGpD39nfMhSmOznyOZuHw==
 
 unique-string@^2.0.0:
   version "2.0.0"
