@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 
-parseOptions(JSON.parse(url.searchParams.get('options')));
+parseOptions(JSON.parse(decodeURIComponent(url.searchParams.get('options'))));
 refresh(url.searchParams.get('refreshNeeded'));
 document.getElementById('version').innerHTML = url.searchParams.get('version');
 
