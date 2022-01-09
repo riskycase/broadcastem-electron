@@ -1,4 +1,4 @@
-name: Build/release
+name: Build and release
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Build/release Electron app
+      - name: Build and release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}
