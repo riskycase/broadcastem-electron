@@ -1,9 +1,7 @@
-name: Build and release
+name: Build
 
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   release:
@@ -22,10 +20,10 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Build and release Electron app
+      - name: Build Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}
-          release: true
+          release: false
           skip_build: true
           args: "--config .electron-builder.json"
